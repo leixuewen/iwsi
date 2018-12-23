@@ -1,11 +1,9 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8"/>
-    <meta name="MobileOptimized" content="320"/>
-    <meta name="HandheldFriendly" content="true"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <title>iwsi</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title i18n="aaa">iwsi</title>
     <script src="generateStrUtil.js"></script>
     <script src="iwsi-i18n.js"></script>
 </head>
@@ -33,17 +31,8 @@
         padding-left: 100%;
     }
 
-    .border-img {
-        color: #00B83F;
-        font-size: 24px;
-        border: 10px solid;
-        border-image: url("http://www.iconpng.com/png/media_monster_christmas/snowflake.png") 140 200 stretch;
-    }
-
 </style>
 <body>
-<div class="full-justified" contenteditable="true">文字两端对齐</div>
-<div class="border-img">图片边框</div>
-
+<div class="full-justified" contenteditable="true" i18n="bbb" @title="ccc" title="标题">文字两端对齐</div>
 </body>
 </html>
