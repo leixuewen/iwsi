@@ -13,10 +13,11 @@ let i18n = {
         } else {
             this.runTranslate(lang);
         }
+        this.tabCSS(lang);
     },
     getTranslate: function (lang) {
         let _this = this, ajax = new XMLHttpRequest();
-        ajax.open(_this.request, _this.language[lang]);
+        ajax.open(_this.request, _this.language[lang].json);
         ajax.onreadystatechange = function () {
             if (ajax.readyState === 4) {
                 _this.langDate[lang] = JSON.parse(ajax.response);
@@ -59,14 +60,30 @@ let i18n = {
             this.endTranslate(lang);
         }
     },
+    tabCSS(lang) {
+        let css = this.language[lang].css, link = document.querySelector("[href='" + css + "']");
+        if (link === null) {
+            link = document.createElement("link");
+            link.setAttribute("rel", "stylesheet");
+            document.getElementsByTagName("head")[0].appendChild(link);
+        }
+        link.setAttribute("href", css);
+    },
     endTranslate(lang) {
         console.log(lang);
     }
 };
-window.onload = function () {
+
+document.addEventListener('DOMContentLoaded', () => {
     i18n.language = {
-        'zh_CN': 'zh_CN.json',
-        'en_US': 'en_US.json',
+        'zh_CN': {
+            json: 'zh_CN.json',
+            css: 'zh_CN.css',
+        },
+        'en_US': {
+            json: 'en_US.json',
+            css: 'en_US.css',
+        }
     };
     i18n.translate('zh_CN');
-};
+});
