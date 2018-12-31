@@ -3,6 +3,7 @@ let i18n = {
     langDate: {},
     langAttr: 'i18n',
     attribute: '@',
+    i18nCSS: 'i18nCSS',
     request: "GET",
     async: true,
     asyncMax: 99,
@@ -61,13 +62,14 @@ let i18n = {
         }
     },
     tabCSS(lang) {
-        let css = this.language[lang].css, link = document.querySelector("[href='" + css + "']");
+        let link = document.querySelector("link[" + this.i18nCSS + "]");
         if (link === null) {
             link = document.createElement("link");
             link.setAttribute("rel", "stylesheet");
+            link.setAttribute(this.i18nCSS, "");
             document.getElementsByTagName("head")[0].appendChild(link);
         }
-        link.setAttribute("href", css);
+        link.setAttribute("href", this.language[lang].css);
     },
     endTranslate(lang) {
         console.log(lang);
