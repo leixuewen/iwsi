@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html i18n @lang="lang" lang="zh_CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=640,user-scalable=no">
+    <title i18n="title">iwsi-i18n</title>
+    <script src="js/iwsi-i18n.js"></script>
+</head>
+<body>
+<h3 i18n="text">文本</h3>
+<h3 i18n @title="attribute" title="属性"></h3>
+<h3 i18n="text" @title="attribute" title="属性">文本</h3>
+<h3><img i18n @src="img_url" @alt="img_alt" src="https://sharder.org/r/sharder/official/img/index/logo.png"
+         alt="sharder"></h3>
+<h3><input type="text" i18n @type="input_type"></h3>
+<h3 i18n @onclick="fun" onclick="aaa()">点击事件</h3>
+<script>
+    function aaa() {
+        console.info("点击事件 aaa");
+        i18n.translate('en_US');
+    }
+
+    function bbb() {
+        console.info("点击事件 bbb");
+        i18n.translate('zh_CN');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        i18n.language = {
+            'zh_CN': {
+                json: 'json/zh_CN.json',
+                css: 'css/zh_CN.css',
+            },
+            'en_US': {
+                json: 'json/en_US.json',
+                css: 'css/en_US.css',
+            }
+        };
+        i18n.translate('zh_CN');
+    });
+</script>
+</body>
+</html>

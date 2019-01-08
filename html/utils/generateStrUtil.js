@@ -26,7 +26,4 @@ let generateStrUtil = {
     generateAlphabetSize: function (num) {
         return this.generateStr(this.ALPHABET_SIZE, num);
     }
-}
-
-// console.info(generateStrUtil.generateAlphabetSize(99));
-// console.info(generateStrUtil.generateStr("!@#$%^&*()", 99));
+};

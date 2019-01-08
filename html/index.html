@@ -2,10 +2,9 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="viewport" content="width=640,user-scalable=no">
     <title i18n="aaa">iwsi</title>
-    <script src="generateStrUtil.js"></script>
-    <script src="iwsi-i18n.js"></script>
+    <script src="utils/generateStrUtil.js"></script>
 </head>
 <style>
     body {
@@ -33,6 +32,10 @@
 
 </style>
 <body>
-<div class="full-justified" contenteditable="true" i18n="bbb" @title="ccc" title="标题">文字两端对齐</div>
+<div class="full-justified" contenteditable="true">文字两端对齐</div>
+<script>
+    console.info(generateStrUtil.generateAlphabetSize(99));
+    console.info(generateStrUtil.generateStr("!@#$%^&*()", 99))
+</script>
 </body>
 </html>

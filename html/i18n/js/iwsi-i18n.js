@@ -52,7 +52,6 @@ let i18n = {
                 let val = langDate[el.getAttribute(name)];
                 if (name.substring(0, al) === this.attribute && val !== undefined) {
                     el.setAttribute(name.substring(al, name.length), val);
-                    break;
                 }
             }
         }
@@ -75,17 +74,3 @@ let i18n = {
         console.log(lang);
     }
 };
-
-document.addEventListener('DOMContentLoaded', () => {
-    i18n.language = {
-        'zh_CN': {
-            json: 'zh_CN.json',
-            css: 'zh_CN.css',
-        },
-        'en_US': {
-            json: 'en_US.json',
-            css: 'en_US.css',
-        }
-    };
-    i18n.translate('zh_CN');
-});
