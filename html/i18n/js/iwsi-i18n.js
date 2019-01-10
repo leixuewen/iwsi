@@ -66,7 +66,7 @@ let i18n = {
             link = document.createElement("link");
             link.setAttribute("rel", "stylesheet");
             link.setAttribute(this.i18nCSS, "");
-            document.getElementsByTagName("head")[0].appendChild(link);
+            document.getElementsByTagName("head")[0].append(link);
         }
         link.setAttribute("href", this.language[lang].css);
     },

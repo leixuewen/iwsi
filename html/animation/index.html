@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=640,user-scalable=no">
+    <title>iwsi</title>
+</head>
+<body>
+<h1 class="btn-animation" style="height: 500px;background: forestgreen"></h1>
+<h1 class="btn-animation" style="height: 500px;background: forestgreen"></h1>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll(".btn-animation").forEach((el) => {
+            el.addEventListener("click", () => {
+                let el = event.srcElement, btn = document.createElement("btn"), time = 1000,
+                    R = Math.ceil(Math.sqrt(Math.pow(el.scrollWidth, 2) + Math.pow(el.scrollHeight, 2)) * 2);
+                el.style.overflow = "hidden";
+                el.style.position = "relative";
+                btn.style.width = R + "px";
+                btn.style.height = R + "px";
+                btn.style.left = (event.clientX - el.offsetLeft - R / 2) + "px";
+                btn.style.top = (event.clientY - el.offsetTop - R / 2) + "px";
+                btn.style.display = "inline-block";
+                btn.style.borderRadius = "50%";
+                btn.style.background = "#fff";
+                btn.style.opacity = "0.6";
+                btn.style.position = "absolute";
+                btn.style.transform = "scale(0)";
+                btn.style.transition = "ALL " + time + "ms";
+                el.append(btn);
+                setTimeout(() => {
+                    btn.style.transform = "scale(1)";
+                });
+                setTimeout(() => {
+                    btn.remove();
+                }, time);
+            }, false);
+        })
+    }, false);
+</script>
+</body>
+</html>
