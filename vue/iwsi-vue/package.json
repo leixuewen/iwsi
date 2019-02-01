@@ -14,10 +14,18 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "blockchain.info": "^2.12.1",
+    "eosjs": "^16.0.9",
+    "scatterjs-core": "^2.7.7",
+    "scatterjs-plugin-eosjs": "^1.5.0",
+    "scatterjs-plugin-eosjs2": "^1.5.0",
+    "scatterjs-plugin-web3": "^1.5.4",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "web3": "^1.0.0-beta.37"
   },
   "devDependencies": {
+    "@babel/runtime": "^7.3.1",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
     "babel-eslint": "^8.2.1",
