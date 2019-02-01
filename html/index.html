@@ -4,38 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=640,user-scalable=no">
     <title i18n="aaa">iwsi</title>
-    <script src="utils/generateStrUtil.js"></script>
+    <!--<script src="utils/generateStrUtil.js"></script>-->
+    <script src="utils/ajax.js"></script>
+    <!--<script src="utils/request.js"></script>-->
 </head>
-<style>
-    body {
-        min-width: 320px !important;
-    }
-
-    body > div {
-        width: 233px;
-        margin: auto;
-        text-align: center;
-    }
-
-    .full-justified {
-        text-align: justify;
-        color: red;
-        font-size: 30px;
-        font-weight: bolder;
-    }
-
-    .full-justified:after {
-        content: "";
-        display: inline-block;
-        padding-left: 100%;
-    }
-
-</style>
 <body>
-<div class="full-justified" contenteditable="true">文字两端对齐</div>
-<script>
-    console.info(generateStrUtil.generateAlphabetSize(99));
-    console.info(generateStrUtil.generateStr("!@#$%^&*()", 99))
-</script>
 </body>
 </html>
