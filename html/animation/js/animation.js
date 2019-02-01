@@ -6,7 +6,7 @@ let animation = {
             if (!el.attributes[this.attr]) {
                 return this.runWaves(el.parentNode);
             }
-            let w = document.createElement("waves"), time = 640, R = time;
+            let w = document.createElement(this.attr), time = 640, R = time;
             if (el === null) return;
             el.style.overflow = "hidden";
             el.style.position = "relative";
@@ -16,7 +16,7 @@ let animation = {
             w.style.top = (event.clientY - el.offsetTop - R / 2) + "px";
             w.style.display = "inline-block";
             w.style.borderRadius = "50%";
-            w.style.background = "#fff";
+            w.style.background = el.getAttribute(this.attr) || "#fff";
             w.style.opacity = "0.6";
             w.style.position = "absolute";
             w.style.transform = "scale(0)";
