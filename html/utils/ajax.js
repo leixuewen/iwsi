@@ -1,79 +1,81 @@
-let ajax = {
-    headers: {"Content-Type": "application/x-www-form-urlencoded"},
+const ajax = {
+    defaults: {
+        url: '',
+        async: false,
+        method: 'GET',
+        baseURL: '',
+        headers: {},
+        params: {},
+        timeout: 60000,
+    },
+    interceptors: {
+        request(obj) {
+        },
+        response(res) {
+            return res;
+        },
+    },
     request(obj) {
-        obj.method = obj.method || "GET";
-        obj.data = obj.data || {};
-        obj.headers = obj.headers || this.headers;
-        let xhr = new XMLHttpRequest(), parameter = (() => {
-            let date;
-            for (let h of Object.keys(obj.headers)) {
-                this.headers[h] = obj.headers[h];
-            }
-            for (let o of Object.keys(obj.data)) {
-                date = "&" + o + "=" + obj.data[o];
-            }
-            if (date && obj.method.toLocaleUpperCase() === "POST") {
-                return date.substring(1);
-            }
-            if (date && obj.method.toLocaleUpperCase() === "GET") {
-                if (obj.url.indexOf("?") >= 0) {
-                    obj.url += date;
-                } else {
-                    obj.url += "?" + date.substring(1);
-                }
-            }
-        })();
-        xhr.open(obj.method, obj.url, !obj.async);
-        xhr.timeout = obj.timeout;
-        for (let h of Object.keys(this.headers)) {
-            xhr.setRequestHeader(h, this.headers[h]);
-            if (this.headers[h].toLocaleLowerCase() === "application/json") {
-                parameter = JSON.stringify(obj.data);
+        ajax.interceptors.request(obj);
+        let xhr = new XMLHttpRequest(), config = {...ajax.defaults, ...obj},
+            params = {...obj.params}, parameter;
+        xhr.timeout = config.timeout;
+        xhr.ontimeout = () => xhr.abort();
+        for (let k of Object.keys(config.headers)) {
+            xhr.setRequestHeader(k, config.headers[k]);
+        }
+        for (let k of Object.keys(config)) {
+            if (!ajax.defaults[k]) {
+                params[k] = config[k];
             }
         }
+        if (config.headers['Content-Type'] === 'application/json') {
+            parameter = JSON.stringify(params);
+        } else {
+            for (let p of Object.keys(params)) {
+                parameter = parameter + '&' + p + '=' + params[p];
+            }
+            if (config.method === 'GET') {
+                config.url = config.url.indexOf('?') >= 0 ? config.url + parameter : config.url += "?" + parameter.substring(1);
+            } else {
+                parameter = parameter.substring(1);
+            }
+        }
+        xhr.open(config.method, config.baseURL + config.url, config.async);
         return new Promise((resolve, reject) => {
-            xhr.onload = function () {
-                resolve(xhr);
-            };
-            xhr.onerror = function () {
-                reject(xhr);
-            };
-            xhr.ontimeout = function () {
-                xhr.abort();
-            };
+            xhr.onload = () => resolve(ajax.interceptors.response(xhr));
+            xhr.onerror = () => reject(ajax.interceptors.response(xhr));
             xhr.send(parameter);
         });
     },
     get(url, obj) {
-        obj["url"] = url;
-        obj['method'] = "GET";
-        return this.request(obj);
+        obj['url'] = url;
+        obj['method'] = 'GET';
+        return ajax.request(obj);
+    },
+    delete(url, obj) {
+        obj['url'] = url;
+        obj['method'] = 'DELETE';
+        return ajax.request(obj);
+    },
+    head(url, obj) {
+        obj['url'] = url;
+        obj['method'] = 'HEAD';
+        return ajax.request(obj);
     },
     post(url, obj) {
-        obj["url"] = url;
-        obj['method'] = "POST";
-        return this.request(obj);
+        obj['url'] = url;
+        obj['method'] = 'POST';
+        return ajax.request(obj);
     },
-    getJSON(url) {
-        return this.requestJSON("GET", url);
+    put(url, obj) {
+        obj['url'] = url;
+        obj['method'] = 'PUT';
+        return ajax.request(obj);
     },
-    postJSON(url) {
-        return this.requestJSON("POST", url);
-    },
-    requestJSON(method, url) {
-        return new Promise((resolve, reject) => {
-            this.request({
-                method: method,
-                url: url,
-                timeout: 1000,
-            }).then(res => {
-                resolve(JSON.parse(res.response));
-            }).catch(e => {
-                reject(e);
-            });
-        });
+    patch(url, obj) {
+        obj['url'] = url;
+        obj['method'] = 'PATCH';
+        return ajax.request(obj);
     },
 };
-ajax.postJSON("/html/i18n/json/zh_CN.json").then(res => {
-    console.info(res);
-});
