@@ -2,12 +2,11 @@ let animation = {
     waves: {
         attr: "waves",
         runWaves(el) {
-            if (el.tagName === "HTML") return;
+            if (el === null || el.tagName === "HTML") return;
             if (!el.attributes[this.attr]) {
                 return this.runWaves(el.parentNode);
             }
             let w = document.createElement(this.attr), time = 640, R = time;
-            if (el === null) return;
             el.style.overflow = "hidden";
             el.style.position = "relative";
             w.style.width = R + "px";
